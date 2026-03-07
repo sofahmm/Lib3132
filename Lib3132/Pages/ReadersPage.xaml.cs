@@ -31,6 +31,7 @@ namespace Lib3132.Pages
             sorts = new List<string> { "Сбросить сортировку", "А - Я", "Я - А" };
             SortCmb.ItemsSource = sorts;
             genders = new List<Gender>(ConnectionString.libraryKIUEntities.Gender.ToList());
+            genders.Insert(0, new Gender { Id = -1, Name = "Сброс фильтров" });
             this.DataContext = this;
         }
 
@@ -59,8 +60,20 @@ namespace Lib3132.Pages
         private void FilterCmb_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var gen = FilterCmb.SelectedItem as Gender;
-            ReadersLv.ItemsSource = new List<Reader>(ConnectionString.libraryKIUEntities.Reader.
-                Where(i => i.IdGender == gen.Id).ToList());
+            if(gen.Id == -1)
+            {
+                ReadersLv.ItemsSource = readers;
+            }
+            else
+            {
+                ReadersLv.ItemsSource = new List<Reader>(ConnectionString.libraryKIUEntities.Reader.
+                   Where(i => i.IdGender == gen.Id).ToList());
+            }
+        }
+
+        private void AddReaderBtn_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new AddReadersPage());
         }
     }
 }

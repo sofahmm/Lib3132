@@ -58,18 +58,36 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
 
-                        <StackPanel>
-                            <TextBlock Text="{Binding FIO}"/>
-                            <TextBlock Text="{Binding BirthDate}"/>
-                            <TextBlock Text="{Binding IdGender}"/>
+                        <StackPanel Width="400">
+                            <TextBlock Text="{Binding FIO}"
+                                       FontSize="18"/>
+                            <TextBlock Text="{Binding BirthDate, StringFormat='dd.MM.yyyy'}"
+                                       FontSize="16"/>
+                            <TextBlock Text="{Binding Gender.Name}"
+                                       FontSize="16"/>
                         </StackPanel>
                         <StackPanel Grid.Column="1">
-                            <TextBlock Text="{Binding NumberPhone}"/>
-                            <TextBlock Text="{Binding Email}"/>
+                            <TextBlock Text="{Binding NumberPhone}"
+                                       FontSize="16"/>
+                            <TextBlock Text="{Binding Email}"
+                                       FontSize="16"/>
                         </StackPanel>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+
+        <Button Grid.Column="3"
+                Height="70"
+                Width="150"
+                Background="DarkOliveGreen"
+                Foreground="Wheat"
+                Name="AddReaderBtn"
+                Click="AddReaderBtn_Click">
+            <TextBlock Text="Добавление читателя"
+                       FontSize="20"
+                       TextWrapping="Wrap"
+                       TextAlignment="Center"/>
+        </Button>
     </Grid>
 </Page>
